@@ -84,7 +84,7 @@ def slide_menu(opening=True):
         # Draw the sliding menu
         pygame.draw.rect(screen, SLIDE_COLOR, (menu_x, 0, menu_width, HEIGHT))
         # options = ["Options", "Firmware update"]
-        options = ["Options", "Firmware update", "Screen Blackout"]
+        options = ["Options", "Firmware update", "Screen Blackout", "Reboot"]
 
         for i, option in enumerate(options):
             option_text = font.render(option, True, WHITE)
@@ -138,7 +138,7 @@ def main():
         if menu_visible:
             pygame.draw.rect(screen, SLIDE_COLOR, (WIDTH - 150, 0, 150, HEIGHT))
             # options = ["Options", "Firmware update"]
-            options = ["Options", "Firmware update", "Screen Blackout"]
+            options = ["Options", "Firmware update", "Screen Blackout", "Reboot"]
             for i, option in enumerate(options):
                 option_text = font.render(option, True, WHITE)
                 screen.blit(option_text, (WIDTH - 130, 20 + i * 30))
@@ -166,6 +166,8 @@ def main():
                 # Firmware update trigger
                 if menu_visible and (WIDTH - 150 < x < WIDTH) and (50 < y < 80):
                     run_firmware_update()
+                if menu_visible and (WIDTH - 150 < x < WIDTH) and (130 < y < 160):
+                    subprocess.run(["sudo", "reboot", "now"])
 
         pygame.display.update()
 
