@@ -28,7 +28,8 @@ pygame.init()
 
 # Screen Setup
 WIDTH, HEIGHT = 240, 240  # Adjust for TailsWatch display
-screen = pygame.display.set_mode((WIDTH, HEIGHT))
+pygameflags = pygame.FULLSCREEN
+screen = pygame.display.set_mode((WIDTH, HEIGHT), flags=pygameflags)
 pygame.display.set_caption("TailsWatch Firmware")
 
 # Colors
