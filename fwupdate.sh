@@ -5,7 +5,11 @@ cp firmware.py firmware.py.old
 #Scary!
 rm -rf firmware.py
 echo Downloading Updater...
-wget http://10.0.0.25/tailswatch/updater.sh
+git clone https://github.com/tails1154/tailswatch
+cd tailswatch
+cp updater.sh ..
+cd ..
+rm -rf tailswatch
 chmod +rwx updater.sh
 echo Starting updater...
 ./updater.sh
