@@ -27,7 +27,7 @@ def run_firmware_update():
 pygame.init()
 
 # Screen Setup
-WIDTH, HEIGHT = 240, 240  # Adjust for TailsWatch display
+WIDTH, HEIGHT = 1080, 480  # Adjust for TailsWatch display
 pygameflags = pygame.FULLSCREEN
 screen = pygame.display.set_mode((WIDTH, HEIGHT), flags=pygameflags)
 pygame.display.set_caption("TailsWatch Firmware")
