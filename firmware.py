@@ -167,6 +167,8 @@ def main():
                 if menu_visible and (WIDTH - 150 < x < WIDTH) and (50 < y < 80):
                     run_firmware_update()
                 if menu_visible and (WIDTH - 150 < x < WIDTH) and (130 < y < 160):
+                    slide_menu(opening=False)
+                    menu_visible = False
                     subprocess.run(["sudo", "reboot", "now"])
 
         pygame.display.update()
