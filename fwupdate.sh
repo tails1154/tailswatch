@@ -16,7 +16,12 @@ chmod +rwx updater.sh
 echo Starting updater...
 # ./updater.sh
 rm -rf updater.sh
-echo Firmware Updated!
+# Check if the firmware still exists
+ls firmware.py && echo Firmware Updated! && exit 0
+# If we reach here, copy the old firmware
+echo Rolling back...
+cp firmware.py.old firmware.py
+echo Firmware Update Failed, Restored old firmware.
 exit
 
 
