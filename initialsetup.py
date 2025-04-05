@@ -241,7 +241,7 @@ def main():
 def intro_screen():
     screen.fill(BLACK)
     title = font.render("Welcome to", True, WHITE)
-    subtitle = font.render("TailsWatch!", True, TAILS_BLUE)
+    subtitle = font.render("TailsWatch", True, TAILS_BLUE)
 
     screen.blit(title, (WIDTH // 2 - title.get_width() // 2, HEIGHT // 3))
     screen.blit(subtitle, (WIDTH // 2 - subtitle.get_width() // 2, HEIGHT // 2))
