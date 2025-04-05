@@ -220,7 +220,8 @@ def main():
                 if menu_visible and (WIDTH - 150 < x < WIDTH) and (120 < y < 150):
                     slide_menu(opening=False)
                     menu_visible = False
-                    subprocess.run(["kodi"])
+                    #subprocess.run(["kodi"])
+                    running = False
                 # Reboot menu yes
                 if menu_visible_reboot and (WIDTH - 150 < x < WIDTH) and (90 < y < 120):
                     slide_menu_reboot_confirm(opening=False)
