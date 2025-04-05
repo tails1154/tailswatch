@@ -1,6 +1,7 @@
 import pygame
 import sys
-import pytzimport subprocess
+import pytzimport 
+import subprocess
 from datetime import datetime
 import subprocess
 import os
