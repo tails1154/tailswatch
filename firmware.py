@@ -165,7 +165,14 @@ def main():
 
                 # Firmware update trigger
                 if menu_visible and (WIDTH - 150 < x < WIDTH) and (50 < y < 80):
+                    slide_menu(opening=False)
+                    menu_visible = False
+                    screen.fill(TAILS_BLUE)
+                    update_text = big_font.render("Updating", True, WHITE)
+                    screen.blit(update_text, (menu_x + 20, 90))
+                    pygame.display.flip()
                     run_firmware_update()
+                # Reboot button
                 if menu_visible and (WIDTH - 150 < x < WIDTH) and (130 < y < 160):
                     slide_menu(opening=False)
                     menu_visible = False
