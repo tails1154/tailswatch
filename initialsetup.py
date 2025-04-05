@@ -233,16 +233,16 @@ def main():
                     slide_menu_reboot_confirm(opening=False)
                     menu_visible_reboot = False
                 if menu_visible and (WIDTH - 150 < x < WIDTH) and (150 < y < 180):
-#                    slide_menu(opening=False)
- #                   menu_visible_reboot = False
+                    # slide_menu(opening=False)
+                    # menu_visible_reboot = False
                     #pygame.mixer.music.init()
                     if music_playing == False:
- #                      pygame.mixer.music.load("music.mp3")
-#                       pygame.mixer.music.play()
-                        subprocess.run(["cvlc", "music.mp3"])
+                       pygame.mixer.music.load("music.mp3")
+                       pygame.mixer.music.play()
+                     #  subprocess.run(["cvlc", "music.mp3"])
                     else:
-                       #pygame.mixer.music.stop()
-                       subprocess.run(["killall", "cvlc"])
+                       pygame.mixer.music.stop()
+  #                #    subprocess.run(["killall", "cvlc"])
 
         pygame.display.update()
 
