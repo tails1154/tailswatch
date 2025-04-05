@@ -15,7 +15,6 @@ def run_firmware_update():
         # Restart the firmware after update
         python_exec = sys.executable
         firmware_script = os.path.abspath(__file__)
-
         # Exit the current process and start the updated firmware
         os.execv(python_exec, [python_exec, firmware_script])
 
@@ -102,6 +101,36 @@ def slide_menu(opening=True):
 
     return WIDTH - menu_width if opening else WIDTH  # Final position
 
+# Sliding Menu Reboot Function (Non-looping, stays open until closed)
+def slide_menu_reboot_confirm(opening=True):
+    menu_width = 150
+    speed = 10
+    menu_x = WIDTH if opening else WIDTH - menu_width  # Start off-screen (opening) or fully visible (closing)
+
+    while (opening and menu_x > WIDTH - menu_width) or (not opening and menu_x < WIDTH):
+        screen.fill(TAILS_BLUE)
+
+        # Draw the sliding menu
+        pygame.draw.rect(screen, SLIDE_COLOR, (menu_x, 0, menu_width, HEIGHT))
+        # options = ["Options", "Firmware update"]
+        options = ["Reboot", "Yes", "No"]
+
+        for i, option in enumerate(options):
+            option_text = font.render(option, True, WHITE)
+            screen.blit(option_text, (menu_x + 20, 20 + i * 30))
+
+        # Display current time
+        time_text = big_font.render(get_time(), True, WHITE)
+        screen.blit(time_text, (menu_x + 20, 90))
+
+        pygame.display.update()
+
+        # Sliding effect
+        menu_x -= speed if opening else -speed
+        pygame.time.delay(10)
+
+    return WIDTH - menu_width if opening else WIDTH  # Final position
+
 # Blackout Mode Function
 def blackout_mode():
     screen.fill(BLACK)
@@ -125,6 +154,7 @@ def main():
 
     running = True
     menu_visible = False
+    menu_visible_reboot = False
     menu_x = WIDTH  # Menu starts off-screen
 
     while running:
@@ -133,6 +163,20 @@ def main():
         # Draw the clock
         time_text = big_font.render(get_time(), True, WHITE)
         screen.blit(time_text, (WIDTH // 2 - time_text.get_width() // 2, HEIGHT // 2))
+
+
+
+        # Keep the reboot menu visible if open
+        if menu_visible_reboot:
+            pygame.draw.rect(screen, SLIDE_COLOR, (WIDTH - 150, 0, 150, HEIGHT))
+            # options = ["Options", "Firmware update"]
+            options = ["Reboot", "Yes", "No"]
+            for i, option in enumerate(options):
+                option_text = font.render(option, True, WHITE)
+                screen.blit(option_text, (WIDTH - 130, 20 + i * 30))
+
+
+
 
         # Keep the menu visible if open
         if menu_visible:
@@ -174,9 +218,17 @@ def main():
                     run_firmware_update()
                 # Reboot button
                 if menu_visible and (WIDTH - 150 < x < WIDTH) and (130 < y < 160):
-                    slide_menu(opening=False)
-                    menu_visible = False
+                    slide_menu_reboot_confirm(opening=True)
+                    menu_visible_reboot = True
+                # Reboot menu yes
+                if menu_visible_reboot and (WIDTH - 150 < x < WIDTH) and (90 < y < 120):
+                    slide_menu_reboot_confirm(opening=False)
+                    menu_visible_reboot = False
                     subprocess.run(["sudo", "reboot", "now"])
+                # Reboot menu no
+                if menu_visible_reboot and (WIDTH - 150 < x < WIDTH) and (130 < y < 160):
+                    slide_menu_reboot_confirm(opening=False)
+                    menu_visible_reboot = False
 
         pygame.display.update()
 
