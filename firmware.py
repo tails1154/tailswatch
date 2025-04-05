@@ -151,11 +151,12 @@ def blackout_mode():
 def main():
     intro_static_background()
     intro_screen()
-
+    pygame.mixer.music.init()
     running = True
     menu_visible = False
     menu_visible_reboot = False
     menu_x = WIDTH  # Menu starts off-screen
+    music_playing = False
 
     while running:
         screen.fill(TAILS_BLUE)
@@ -212,8 +213,8 @@ def main():
                     slide_menu(opening=False)
                     menu_visible = False
                     screen.fill(TAILS_BLUE)
-                    update_text = big_font.render("Updating", True, WHITE)
-                    screen.blit(update_text, (menu_x + 20, 90))
+                    update_text = big_font.render("Updating", True, BLACK)
+                    screen.blit(update_text, (50, 50))
                     pygame.display.flip()
                     run_firmware_update()
                 # Reboot button
@@ -234,9 +235,12 @@ def main():
                 if menu_visible and (WIDTH - 150 < x < WIDTH) and (140 < y < 170):
                     slide_menu(opening=False)
                     menu_visible_reboot = False
-                    pygame.mixer.music.init()
-                    pygame.mixer.music.load("music.mp3")
-                    pygame.mixer.music.play()
+                    #pygame.mixer.music.init()
+                    if not music_playing:
+                       pygame.mixer.music.load("music.mp3")
+                       pygame.mixer.music.play()
+                    else:
+                       pygame.mixer.music.stop()
 
         pygame.display.update()
 
