@@ -83,7 +83,7 @@ def slide_menu(opening=True):
         # Draw the sliding menu
         pygame.draw.rect(screen, SLIDE_COLOR, (menu_x, 0, menu_width, HEIGHT))
         # options = ["Options", "Firmware update"]
-        options = ["Options", "Firmware update", "Screen Blackout", "Kodi"]
+        options = ["Options", "Firmware update", "Screen Blackout", "Quit"]
 
         for i, option in enumerate(options):
             option_text = font.render(option, True, WHITE)
@@ -182,7 +182,7 @@ def main():
         if menu_visible:
             pygame.draw.rect(screen, SLIDE_COLOR, (WIDTH - 150, 0, 150, HEIGHT))
             # options = ["Options", "Firmware update"]
-            options = ["Options", "Firmware update", "Screen Blackout", "Kodi"]
+            options = ["Options", "Firmware update", "Screen Blackout", "Quit"]
             for i, option in enumerate(options):
                 option_text = font.render(option, True, WHITE)
                 screen.blit(option_text, (WIDTH - 130, 20 + i * 30))
@@ -217,7 +217,7 @@ def main():
                     pygame.display.flip()
                     run_firmware_update()
                 # Reboot button
-                if menu_visible and (WIDTH - 150 < x < WIDTH) and (130 < y < 160):
+                if menu_visible and (WIDTH - 150 < x < WIDTH) and (120 < y < 150):
                     slide_menu(opening=False)
                     menu_visible = False
                     subprocess.run(["kodi"])
