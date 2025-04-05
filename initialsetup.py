@@ -232,11 +232,11 @@ def main():
                 if menu_visible_reboot and (WIDTH - 150 < x < WIDTH) and (130 < y < 160):
                     slide_menu_reboot_confirm(opening=False)
                     menu_visible_reboot = False
-                if menu_visible and (WIDTH - 150 < x < WIDTH) and (140 < y < 170):
+                if menu_visible and (WIDTH - 150 < x < WIDTH) and (150 < y < 180):
                     slide_menu(opening=False)
                     menu_visible_reboot = False
                     #pygame.mixer.music.init()
-                    if not music_playing:
+                    if music_playing == False:
                        pygame.mixer.music.load("music.mp3")
                        pygame.mixer.music.play()
                     else:
