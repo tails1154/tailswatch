@@ -236,10 +236,12 @@ def main():
  #                   menu_visible_reboot = False
                     #pygame.mixer.music.init()
                     if music_playing == False:
-                       pygame.mixer.music.load("music.mp3")
-                       pygame.mixer.music.play()
+ #                      pygame.mixer.music.load("music.mp3")
+#                       pygame.mixer.music.play()
+                        subprocess.run(["cvlc", "music.mp3"])
                     else:
-                       pygame.mixer.music.stop()
+                       #pygame.mixer.music.stop()
+                       subprocess.run(["killall", "cvlc"])
 
         pygame.display.update()
 
