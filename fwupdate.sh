@@ -6,6 +6,7 @@ cp firmware.py firmware.py.old
 rm -rf firmware.py
 echo Downloading Updater...
 git clone https://github.com/tails1154/tailswatch
+mkdir tailswatch
 cd tailswatch
 cp updater.sh ..
 cd ..
@@ -16,3 +17,6 @@ echo Starting updater...
 rm -rf updater.sh
 echo Firmware Updated!
 exit
+
+
+
