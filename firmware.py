@@ -5,6 +5,7 @@ import subprocess
 from datetime import datetime
 import subprocess
 import os
+import time
 
 # Firmware Update Function
 def run_firmware_update():
@@ -220,6 +221,7 @@ def main():
                 if menu_visible and (WIDTH - 150 < x < WIDTH) and (130 < y < 160):
                     slide_menu_reboot_confirm(opening=True)
                     menu_visible_reboot = True
+                    time.sleep(1)
                 # Reboot menu yes
                 if menu_visible_reboot and (WIDTH - 150 < x < WIDTH) and (90 < y < 120):
                     slide_menu_reboot_confirm(opening=False)
