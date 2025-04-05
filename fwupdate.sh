@@ -9,11 +9,12 @@ git clone https://github.com/tails1154/tailswatch
 mkdir tailswatch
 cd tailswatch
 cp updater.sh ..
+./updater.sh
 cd ..
 rm -rf tailswatch
 chmod +rwx updater.sh
 echo Starting updater...
-./updater.sh
+# ./updater.sh
 rm -rf updater.sh
 echo Firmware Updated!
 exit
