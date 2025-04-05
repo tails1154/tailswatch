@@ -151,7 +151,7 @@ def blackout_mode():
 def main():
     intro_static_background()
     intro_screen()
-    pygame.mixer.music.init()
+    pygame.mixer.init()
     running = True
     menu_visible = False
     menu_visible_reboot = False
