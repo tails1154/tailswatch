@@ -231,7 +231,7 @@ def main():
                 if menu_visible and (WIDTH - 150 < x < WIDTH) and (200 < y < 230):
                     slide_menu(opening=False)
                     menu_visible = False
-                    subprocess.run(["bash", "appspicker.sh")
+                    subprocess.run(["bash", "appspicker.sh"])
                 # Reboot menu yes
                 if menu_visible_reboot and (WIDTH - 150 < x < WIDTH) and (90 < y < 120):
                     slide_menu_reboot_confirm(opening=False)
