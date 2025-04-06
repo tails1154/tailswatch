@@ -223,7 +223,7 @@ def main():
                     menu_visible = False
                     #subprocess.run(["kodi"])
                     running = False
-                if menu_visible and (WIDTH - 150 < x < WIDTH) and (150 < y < 180):
+                if menu_visible and (WIDTH - 150 < x < WIDTH) and (160 < y < 190):
                     slide_menu(opening=False)
                     menu_visible = False
                     subprocess.run(["bash", "reboot.sh"])
