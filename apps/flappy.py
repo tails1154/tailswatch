@@ -1,6 +1,5 @@
 import pygame
 import random
-import time
 
 # Initialize pygame
 pygame.init()
@@ -14,18 +13,20 @@ OBSTACLE_WIDTH = 60
 OBSTACLE_HEIGHT = random.randint(150, 400)
 OBSTACLE_GAP = 150
 GRAVITY = 0.5
-FLAP_STRENGTH = -10
+FLAP_STRENGTH = -7
 GAME_SPEED = 3
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 BIRD_COLOR = (255, 255, 0)
 OBSTACLE_COLOR = (0, 255, 0)
+BUTTON_COLOR = (0, 0, 255)
+BUTTON_HOVER_COLOR = (0, 0, 200)
 
 # Create the screen
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Flappy Bird")
 
-# Load font for score
+# Load font for score and buttons
 font = pygame.font.SysFont("Arial", 30)
 
 # Bird class
@@ -64,6 +65,13 @@ class Obstacle:
 def display_score(score):
     score_text = font.render(f"Score: {score}", True, BLACK)
     screen.blit(score_text, (SCREEN_WIDTH // 2 - score_text.get_width() // 2, SCREEN_HEIGHT // 4))
+
+# Function to display a button
+def draw_button(text, x, y, width, height, hover=False):
+    button_color = BUTTON_HOVER_COLOR if hover else BUTTON_COLOR
+    pygame.draw.rect(screen, button_color, (x, y, width, height))
+    label = font.render(text, True, WHITE)
+    screen.blit(label, (x + (width - label.get_width()) // 2, y + (height - label.get_height()) // 2))
 
 # Main game loop
 def game():
@@ -117,11 +125,27 @@ def game():
                 game_over = True
 
         else:
-            # Display score
+            # Display game over screen and score
             display_score(score)
-            pygame.display.update()
-            time.sleep(5)  # Wait for 5 seconds before closing
-            running = False
+
+            # Draw Retry and Quit buttons
+            mouse_x, mouse_y = pygame.mouse.get_pos()
+            retry_button_hover = 200 <= mouse_x <= 300 and 400 <= mouse_y <= 450
+            quit_button_hover = 100 <= mouse_x <= 300 and 500 <= mouse_y <= 550
+
+            draw_button("Retry", 200, 400, 100, 50, retry_button_hover)
+            draw_button("Quit", 100, 500, 200, 50, quit_button_hover)
+
+            # Check button clicks
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    running = False
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    if retry_button_hover:
+                        running = True
+                       	game()  # Restart the game
+                    elif quit_button_hover:
+                        running = False  # Quit the game
 
         pygame.display.update()
         clock.tick(60)
