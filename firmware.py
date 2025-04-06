@@ -83,7 +83,7 @@ def slide_menu(opening=True):
         # Draw the sliding menu
         pygame.draw.rect(screen, SLIDE_COLOR, (menu_x, 0, menu_width, HEIGHT))
         # options = ["Options", "Firmware update"]
-        options = ["Options", "Firmware update", "Screen Blackout", "Quit", "Music", "Reboot"]
+        options = ["Options", "Firmware update", "Screen Blackout", "Quit", "Music", "Reboot", "Apps"]
 
         for i, option in enumerate(options):
             option_text = font.render(option, True, WHITE)
@@ -183,7 +183,7 @@ def main():
         if menu_visible:
             pygame.draw.rect(screen, SLIDE_COLOR, (WIDTH - 150, 0, 150, HEIGHT))
             # options = ["Options", "Firmware update"]
-            options = ["Options", "Firmware update", "Screen Blackout", "Quit", "Music", "Reboot"]
+            options = ["Options", "Firmware update", "Screen Blackout", "Quit", "Music", "Reboot", "Apps"]
             for i, option in enumerate(options):
                 option_text = font.render(option, True, WHITE)
                 screen.blit(option_text, (WIDTH - 130, 20 + i * 30))
@@ -223,10 +223,15 @@ def main():
                     menu_visible = False
                     #subprocess.run(["kodi"])
                     running = False
+                # Reboot Button
                 if menu_visible and (WIDTH - 150 < x < WIDTH) and (160 < y < 190):
                     slide_menu(opening=False)
                     menu_visible = False
                     subprocess.run(["bash", "reboot.sh"])
+                if menu_visible and (WIDTH - 150 < x < WIDTH) and (200 < y < 230):
+                    slide_menu(opening=False)
+                    menu_visible = False
+                    subprocess.run(["bash", "appspicker.sh")
                 # Reboot menu yes
                 if menu_visible_reboot and (WIDTH - 150 < x < WIDTH) and (90 < y < 120):
                     slide_menu_reboot_confirm(opening=False)
